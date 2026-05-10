@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Olive!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Hi+Melody&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Gaegu', cursive;
+            overflow-x: hidden;
+            background: #fef6f0;
+        }
+
+        /* ===== PAGE 1: MAIN ===== */
+        #page-main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #fef6f0 0%, #fff5f5 50%, #fef0e8 100%);
+        }
+
+        /* Garland / Banner */
+        .garland {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 2;
+        }
+
+        .garland svg {
+            width: 100%;
+            max-width: 500px;
+            height: 80px;
+        }
+
+        .flag {
+            animation: sway 2s ease-in-out infinite alternate;
+        }
+
+        .flag:nth-child(even) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes sway {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
+
+        /* Title */
+        .title-section {
+            margin-top: 70px;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .title-date {
+            font-family: 'Hi Melody', cursive;
+            font-size: 14px;
+            color: #c9a0dc;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .title-main {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(28px, 8vw, 48px);
+            color: #e87fa0;
+            text-shadow: 2px 2px 0px rgba(232, 127, 160, 0.2);
+            line-height: 1.3;
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        .title-sub {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(14px, 4vw, 20px);
+            color: #a0c4e8;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .title-congrats {
+            font-family: 'Gaegu', cursive;
+            font-size: clamp(15px, 4.5vw, 22px);
+            color: #e8a0c8;
+            margin-top: 12px;
+            font-weight: 700;
+            animation: titleBounce 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Floating decorations */
+        .floating-deco {
+            position: absolute;
+            animation: floatUp 3s ease-in-out infinite;
+            opacity: 0.7;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Balloons */
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: balloonFloat 4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 1px;
+            height: 20px;
+            background: #ccc;
+            transform: translateX(-50%);
+        }
+
+        .balloon-1 { background: #a8d8f0; left: 5%; top: 20%; animation-delay: 0s; }
+        .balloon-2 { background: #f0b8d0; right: 8%; top: 15%; animation-delay: 0.5s; }
+        .balloon-3 { background: #f0d8a8; left: 10%; top: 55%; animation-delay: 1s; width: 35px; height: 44px; }
+        .balloon-4 { background: #d0a8f0; right: 5%; top: 50%; animation-delay: 1.5s; width: 35px; height: 44px; }
+        .balloon-5 { background: #a8f0d0; left: 3%; top: 75%; animation-delay: 0.7s; width: 30px; height: 38px; }
+
+        @keyframes balloonFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        /* Dog photos + cake grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            gap: 10px;
+            margin-top: 30px;
+            z-index: 3;
+            max-width: 360px;
+            width: 100%;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .photo-sticker {
+            width: clamp(90px, 28vw, 140px);
+            height: auto;
+            transform: rotate(var(--rotate, 0deg));
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            animation: stickerBounce var(--duration, 3s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .photo-sticker:hover {
+            transform: rotate(0deg) scale(1.15);
+        }
+
+        .cake-center {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cake-center img {
+            width: clamp(180px, 50vw, 280px);
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+            animation: cakeWiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes stickerBounce {
+            0%, 100% { transform: rotate(var(--rotate, 0deg)) translateY(0); }
+            50% { transform: rotate(var(--rotate, 0deg)) translateY(-8px); }
+        }
+
+        /* Cake section */
+        .cake-section {
+            margin-top: 30px;
+            text-align: center;
+            z-index: 3;
+            position: relative;
+        }
+
+        .cake-emoji {
+            font-size: 80px;
+            animation: cakeWiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes cakeWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        .sparkles {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.5; transform: translateX(-50%) scale(1.2); }
+        }
+
+        /* Bottom decorations */
+        .bottom-deco {
+            margin-top: 20px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 15px;
+            z-index: 3;
+        }
+
+        .gift-box {
+            font-size: 40px;
+            animation: giftBounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes giftBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            margin-top: 40px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #f0a8c8, #c8a0e8);
+            border: none;
+            border-radius: 30px;
+            font-family: 'Gaegu', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(200, 150, 200, 0.4);
+            transition: all 0.3s ease;
+            z-index: 3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200, 150, 200, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        /* Hearts floating */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            font-size: 16px;
+            opacity: 0;
+            animation: heartRise 6s ease-in-out infinite;
+        }
+
+        @keyframes heartRise {
+            0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { opacity: 0; transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        /* Sticker decorations */
+        .sticker {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* BGM control */
+        .bgm-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #f0a8c8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(200, 150, 180, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .bgm-control:hover {
+            transform: scale(1.1);
+        }
+
+        .bgm-control.playing {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 2px 10px rgba(200, 150, 180, 0.3); }
+            50% { box-shadow: 0 2px 20px rgba(200, 150, 180, 0.6); }
+        }
+
+        /* ===== PAGE 2: LETTER ===== */
+        #page-letter {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background: #fef9f5;
+            position: relative;
+        }
+
+        #page-letter.active {
+            display: flex;
+        }
+
+        #page-main.hidden {
+            display: none;
+        }
+
+        /* Back button */
+        .back-button {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #c9a0dc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 18px;
+            color: #c9a0dc;
+            box-shadow: 0 2px 10px rgba(200, 150, 200, 0.2);
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Letter paper */
+        .letter-container {
+            max-width: 500px;
+            width: 100%;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .letter-archive-title {
+            font-family: 'Hi Melody', cursive;
+            font-size: 14px;
+            color: #c9a0dc;
+            letter-spacing: 1px;
+        }
+
+        .letter-title {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(32px, 9vw, 50px);
+            color: #e87fa0;
+            line-height: 1.2;
+            margin-top: 10px;
+        }
+
+        .letter-paper {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 20px rgba(200, 170, 190, 0.15);
+            position: relative;
+            border: 1px solid rgba(200, 170, 190, 0.2);
+        }
+
+        .letter-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 27px,
+                rgba(200, 180, 200, 0.1) 28px
+            );
+            pointer-events: none;
+        }
+
+        .letter-content {
+            font-family: 'Gowun Dodum', sans-serif;
+            font-size: 15px;
+            line-height: 2;
+            color: #4a3a4a;
+            white-space: pre-wrap;
+            position: relative;
+            z-index: 1;
+            word-break: keep-all;
+        }
+
+        .letter-sign {
+            text-align: right;
+            margin-top: 30px;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 22px;
+            color: #c9a0dc;
+        }
+
+        /* Letter stickers */
+        .letter-sticker {
+            position: absolute;
+            font-size: 22px;
+            opacity: 0.5;
+            z-index: 2;
+        }
+
+        /* Invitation Ticket */
+        .ticket-card {
+            max-width: 500px;
+            width: 100%;
+            margin-top: 30px;
+            background: linear-gradient(135deg, #fff9f0, #fff5f8);
+            border: 2px dashed #e8c0d0;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(200, 150, 180, 0.15);
+            animation: ticketAppear 0.8s ease-out;
+        }
+
+        @keyframes ticketAppear {
+            from { opacity: 0; transform: scale(0.9) rotate(-2deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .ticket-hole {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fef9f5;
+            border-radius: 50%;
+            border: 2px dashed #e8c0d0;
+        }
+
+        .ticket-hole-top {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ticket-hole-bottom {
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ticket-left {
+            flex: 1;
+            text-align: center;
+        }
+
+        .ticket-badge {
+            font-family: 'Gaegu', cursive;
+            font-size: 12px;
+            font-weight: 700;
+            color: #c9a0dc;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .ticket-show-title {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: clamp(24px, 6vw, 32px);
+            color: #5a4a5a;
+            line-height: 1.2;
+        }
+
+        .ticket-show-sub {
+            font-family: 'Gaegu', cursive;
+            font-size: 13px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .ticket-show-emoji {
+            font-size: 24px;
+            margin-top: 8px;
+        }
+
+        .ticket-divider {
+            width: 1px;
+            height: 100px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #e8c0d0 0px,
+                #e8c0d0 4px,
+                transparent 4px,
+                transparent 8px
+            );
+        }
+
+        .ticket-right {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ticket-detail {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .ticket-detail-label {
+            font-family: 'Gaegu', cursive;
+            font-size: 11px;
+            font-weight: 700;
+            color: #c9a0dc;
+            letter-spacing: 1px;
+        }
+
+        .ticket-detail-value {
+            font-family: 'Gaegu', cursive;
+            font-size: 15px;
+            font-weight: 700;
+            color: #5a4a5a;
+        }
+
+        .ticket-detail-highlight .ticket-detail-value {
+            color: #e87fa0;
+            font-size: 16px;
+        }
+
+        @media (max-width: 400px) {
+            .ticket-card {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .ticket-divider {
+                width: 80%;
+                height: 1px;
+                background: repeating-linear-gradient(
+                    to right,
+                    #e8c0d0 0px,
+                    #e8c0d0 4px,
+                    transparent 4px,
+                    transparent 8px
+                );
+            }
+
+            .ticket-hole-top {
+                top: 50%;
+                left: -12px;
+                transform: translateY(-50%);
+            }
+
+            .ticket-hole-bottom {
+                top: 50%;
+                left: auto;
+                right: -12px;
+                bottom: auto;
+                transform: translateY(-50%);
+            }
+        }
+
+        /* Letter bottom deco */
+        .letter-bottom-deco {
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 28px;
+            color: #c9a0dc;
+            opacity: 0.7;
+        }
+
+        /* Page transition */
+        .page-transition {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .photo-sticker {
+                width: clamp(80px, 25vw, 110px);
+            }
+
+            .cake-center img {
+                width: clamp(150px, 45vw, 220px);
+            }
+
+            .balloon {
+                width: 30px;
+                height: 38px;
+            }
+
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .photo-sticker {
+                width: 150px;
+            }
+
+            .cake-center img {
+                width: 300px;
+            }
+
+            .photo-grid {
+                max-width: 450px;
+            }
+
+            .letter-paper {
+                padding: 40px 35px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .bgm-control, .back-button, .cta-button, .hearts-container,
+            .balloon, .garland { display: none !important; }
+            #page-letter { display: flex !important; }
+            #page-main { display: none !important; }
+            .letter-paper { box-shadow: none; border: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- BGM -->
+<audio id="bgm" loop>
+    <source src="bgm.m4a" type="audio/mp4">
+</audio>
+
+<!-- Floating Hearts Background -->
+<div class="hearts-container" id="hearts-container"></div>
+
+<!-- BGM Control -->
+<div class="bgm-control" id="bgm-btn" onclick="toggleBGM()">
+    <span id="bgm-icon">&#9835;</span>
+</div>
+
+<!-- ===== PAGE 1: MAIN ===== -->
+<div id="page-main">
+
+    <!-- Garland -->
+    <div class="garland">
+        <svg viewBox="0 0 500 80" preserveAspectRatio="none">
+            <path d="M0,10 Q125,5 250,10 Q375,5 500,10" stroke="#e8c8a0" stroke-width="2" fill="none"/>
+            <!-- Flags -->
+            <polygon class="flag" points="40,12 60,12 55,35 45,35" fill="#f4a0a0" opacity="0.8"/>
+            <polygon class="flag" points="70,10 90,10 85,33 75,33" fill="#a0d8f0" opacity="0.8"/>
+            <polygon class="flag" points="100,11 120,11 115,34 105,34" fill="#f0d080" opacity="0.8"/>
+            <polygon class="flag" points="130,10 150,10 145,33 135,33" fill="#c0e8a0" opacity="0.8"/>
+            <polygon class="flag" points="160,11 180,11 175,34 165,34" fill="#d0a8f0" opacity="0.8"/>
+            <polygon class="flag" points="200,10 220,10 215,33 205,33" fill="#f0b8d0" opacity="0.8"/>
+            <polygon class="flag" points="230,11 250,11 245,34 235,34" fill="#a0c8e8" opacity="0.8"/>
+            <polygon class="flag" points="260,10 280,10 275,33 265,33" fill="#f0d8a8" opacity="0.8"/>
+            <polygon class="flag" points="290,11 310,11 305,34 295,34" fill="#f4a0a0" opacity="0.8"/>
+            <polygon class="flag" points="320,10 340,10 335,33 325,33" fill="#c0e8c0" opacity="0.8"/>
+            <polygon class="flag" points="350,11 370,11 365,34 355,34" fill="#e8c0f0" opacity="0.8"/>
+            <polygon class="flag" points="380,10 400,10 395,33 385,33" fill="#a0d8f0" opacity="0.8"/>
+            <polygon class="flag" points="410,11 430,11 425,34 415,34" fill="#f0c8a0" opacity="0.8"/>
+            <polygon class="flag" points="440,10 460,10 455,33 445,33" fill="#f0b8d0" opacity="0.8"/>
+        </svg>
+    </div>
+
+    <!-- Balloons -->
+    <div class="balloon balloon-1"></div>
+    <div class="balloon balloon-2"></div>
+    <div class="balloon balloon-3"></div>
+    <div class="balloon balloon-4"></div>
+    <div class="balloon balloon-5"></div>
+
+    <!-- Stickers -->
+    <span class="sticker" style="top:12%; right:15%;">&#10084;&#65039;</span>
+    <span class="sticker" style="top:35%; left:5%;">&#10024;</span>
+    <span class="sticker" style="top:60%; right:10%;">&#11088;</span>
+    <span class="sticker" style="bottom:20%; left:8%;">&#128156;</span>
+
+    <!-- Title -->
+    <div class="title-section">
+        <p class="title-date">2026.05.10</p>
+        <h1 class="title-main">Happy Birthday<br>to Olive~!!</h1>
+        <p class="title-sub">The best PT studio SOULFIT &#127775;</p>
+        <p class="title-congrats">🎉 태영쌤 생일 213101239번 축하합니다~~! 🎉</p>
+    </div>
+
+    <!-- Dog Photos + Cake Grid -->
+    <div class="photo-grid">
+        <img class="photo-sticker" src="reference/1.png" alt="Birthday cat" style="--rotate: -5deg; --delay: 0s; --duration: 3s;">
+        <img class="photo-sticker" src="reference/2.png" alt="Birthday cat with cake" style="--rotate: 3deg; --delay: 0.4s; --duration: 3.5s;">
+        <div class="cake-center">
+            <img src="reference/cake.png" alt="Birthday cake">
+        </div>
+        <img class="photo-sticker" src="reference/3.png" alt="Birthday hamster" style="--rotate: -2deg; --delay: 0.8s; --duration: 2.8s;">
+        <img class="photo-sticker" src="reference/4.png" alt="Birthday puppy" style="--rotate: 4deg; --delay: 1.2s; --duration: 3.2s;">
+    </div>
+
+    <!-- Bottom deco -->
+    <div class="bottom-deco">
+        <span class="gift-box" style="animation-delay: 0s;">&#127873;</span>
+        <span class="gift-box" style="animation-delay: 0.3s;">&#127880;</span>
+        <span class="gift-box" style="animation-delay: 0.6s;">&#127873;</span>
+    </div>
+
+    <!-- CTA Button -->
+    <button class="cta-button" onclick="goToLetter()">
+        &#128140; &#54200;&#51648; &#50676;&#50612;&#48372;&#44592; &#128140;
+    </button>
+
+</div>
+
+<!-- ===== PAGE 2: LETTER ===== -->
+<div id="page-letter">
+
+    <!-- Back Button -->
+    <a class="back-button" onclick="goToMain()">&#8592;</a>
+
+    <!-- Letter stickers -->
+    <span class="letter-sticker" style="top: 80px; right: 20px;">&#128156;</span>
+    <span class="letter-sticker" style="top: 120px; left: 15px;">&#10084;&#65039;</span>
+    <span class="letter-sticker" style="bottom: 100px; right: 30px;">&#10024;</span>
+    <span class="letter-sticker" style="bottom: 150px; left: 20px;">&#128062;</span>
+
+    <div class="letter-container page-transition">
+
+        <!-- Letter Header -->
+        <div class="letter-header">
+            <p class="letter-archive-title">- 이 세상에서 제일 멋지고 짱짱인 태영쌤 -</p>
+            <h2 class="letter-title">Olive&#39;s<br>Special Day!</h2>
+        </div>
+
+        <!-- Letter Paper -->
+        <div class="letter-paper">
+            <div class="letter-content">
+꺄아아악~! 드디어 두근두근 0510 쌤의 생일날이군요~!!! 🎂✨
+이제 벌써 21,22,23,24,25,26… 6번째 생일인가요!? 어머나....! 시간이 갈수록 정말 정말 더더더 빠르게 지나가는 것 같지만, 그래도 돌아서 생각해보면 쌤이랑 함께한 일들이 알알이 다 기억나는 것 같아요 🥹🫶🏻
+그만큼 돌아볼 수 있는 귀엽고 좋은 추억들을 많이 많이 만들어주셨다는 거겠죠! 늘 감사합니다 💛
+
+소울핏 오픈하시고 더더더 많이 바빠지셔서, 요새는 거의 연예인 스케줄로 사시는 것 같아 한편으로는 맴이 아프기도 하지만 ㅜ.ㅜ 그래도 앞으로 쌤의 바람처럼 소울핏 더더 초대박나기를 진심으로 응원하고 있습니다!!! (근데 이 기세면 진짜 머지않은 것 같아요 +_+) 그리고 제가 도울 수 있는 게 있다면 언제든지 돕겠씁니다!!!
+
+소울핏은 단순히 '제가 다니는 피티샵~'이 결코 아니고, 왠지.... 진짜 팀원이 된 것 같은 느낌으로 "우리 회사!" 같은 마음이 들어서! 뭔가 하나라도 더 도움이 되고 싶고, 같이 부흥(?)하면 좋겠고! 하는 마음이에요 +_+ 쌤 꼬오오옥 편하게 마구잡이로 시켜주세여!!! 진짜 제 영광이고 행복입니다!!! 약.속 🫰🏻
+
+쌤이 제 20대를 알록달록 톡톡 튀게 만들어주셨구, 이제 30대에는 더 성숙하구 으른!답게 조언해주시구 응원해주시구! 쌤이 제 인생의 구세주!라는 것은 정말 매번 말해도 모자라지 않습니다 (엄근진심) 특히나 작년 말부터 뭔가 우울하고 힘든 일이 몰아쳤을 때 ㅜㅜ 쌤이 옆에 계셔서 정말 정말 정말 큰 힘이 되었어요 ㅜㅜ 아침에 쌤이랑 운동하면서 위로도 받고, 응원도 받고, 에너지도 채우고! 하는 시간이 있어서 힘내서 출근할 수 있었습니다 정말 정말루우우!!
+
+쌤이 "주위에 좋은 분들이 너무 많다~"라고 늘 말씀하시지만, 그건 쌤이 매사에 다 진심인 게 느껴지구, 상대를 아끼는 마음이 느껴지구, 정말 좋은 선생님이자 좋은 사람인게 느껴져서인 거 알고 계시져!!? 🥹
+
+올해는 이런 쌤이랑~ 수업 말고도 같이 느무 느무 마싯는 것도 많이 (제가 얻어) 먹고~ 데이트도 하구~ 얘기도 많이 하고~ 더 돈독(?)해질 수 있어서 저는 너무 좋았어요!!! 이제는 진짜 가족들보다 쌤이랑 더 많이 얘기하고 의지하는 것 같기도 하군요 움하하하 😆 80살 넘어서까지 최고령 PT 트레이너 & PT 수강생으로 함께하기!! 약속입미다!! 💪🏻✨
+
+근데 분명 쌤 생일 축하 편지 쓰기 시작했는데… 또 제 감사편지가 되어버렸네요 ㅎㅎㅎ 그만큼 제가 쌤한테 늘 감사한 게 정말 많다는 뜻이겠죠 🥹🫶🏻 쌤 다시 한 번 진심으로 생일 너무너무 축하드리구요!!! 🎉💛 올해는 누구보다 행복하고, 더 많이 웃고, 더 사랑 많이 받는 한 해가 되셨으면 좋겠어요!!!
+
+그리고 생일 선물로… 제가 데이트 신청 하루 해도 될까요? 😳✨
+            </div>
+            <div class="letter-sign">
+                With love ❤️<br>
+                <small style="font-family: 'Gaegu'; font-size: 16px; color: #999;">FROM 김태영 팬클럽 회장, 쏭~</small>
+            </div>
+        </div>
+
+        <!-- Invitation Ticket -->
+        <div class="ticket-card">
+            <div class="ticket-hole ticket-hole-top"></div>
+            <div class="ticket-hole ticket-hole-bottom"></div>
+            <div class="ticket-left">
+                <div class="ticket-badge">🎫 INVITATION</div>
+                <div class="ticket-show-title">백조의 호수</div>
+                <div class="ticket-show-sub">국립발레단 · Swan Lake</div>
+                <div class="ticket-show-emoji">🩰✨</div>
+            </div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-right">
+                <div class="ticket-detail">
+                    <span class="ticket-detail-label">DATE</span>
+                    <span class="ticket-detail-value">2026. 06. 13 (토)</span>
+                </div>
+                <div class="ticket-detail">
+                    <span class="ticket-detail-label">TIME</span>
+                    <span class="ticket-detail-value">오후 3:00</span>
+                </div>
+                <div class="ticket-detail">
+                    <span class="ticket-detail-label">PLACE</span>
+                    <span class="ticket-detail-value">성남아트센터</span>
+                </div>
+                <div class="ticket-detail ticket-detail-highlight">
+                    <span class="ticket-detail-label">WITH</span>
+                    <span class="ticket-detail-value">♡ 나랑 같이 가요 ♡</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom decoration -->
+        <div class="letter-bottom-deco">
+            🐾 ❤️ 🐾
+        </div>
+    </div>
+</div>
+
+<script>
+    // BGM Control
+    const bgm = document.getElementById('bgm');
+    const bgmBtn = document.getElementById('bgm-btn');
+    const bgmIcon = document.getElementById('bgm-icon');
+    let isPlaying = false;
+
+    function toggleBGM() {
+        if (isPlaying) {
+            bgm.pause();
+            bgmBtn.classList.remove('playing');
+            bgmIcon.textContent = '♫';
+        } else {
+            bgm.play().catch(() => {});
+            bgmBtn.classList.add('playing');
+            bgmIcon.textContent = '♪';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Auto-play BGM on first interaction
+    document.addEventListener('click', function autoPlay() {
+        if (!isPlaying) {
+            bgm.play().then(() => {
+                isPlaying = true;
+                bgmBtn.classList.add('playing');
+                bgmIcon.textContent = '♪';
+            }).catch(() => {});
+        }
+        document.removeEventListener('click', autoPlay);
+    }, { once: true });
+
+    // Page Navigation
+    function goToLetter() {
+        document.getElementById('page-main').classList.add('hidden');
+        document.getElementById('page-letter').classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function goToMain() {
+        document.getElementById('page-letter').classList.remove('active');
+        document.getElementById('page-main').classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+
+    // Generate floating hearts
+    function createHearts() {
+        const container = document.getElementById('hearts-container');
+        const heartSymbols = ['♡', '♥', '❤', '💕'];
+
+        for (let i = 0; i < 12; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'heart';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+            heart.style.fontSize = (12 + Math.random() * 14) + 'px';
+            heart.style.color = ['#f0a8c8', '#c9a0dc', '#a0c4e8', '#f0c8a0'][Math.floor(Math.random() * 4)];
+            container.appendChild(heart);
+        }
+    }
+
+    createHearts();
+</script>
+
+</body>
+</html>
